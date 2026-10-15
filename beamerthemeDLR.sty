@@ -1,0 +1,92 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeDLR}[2026/10/15 DLR PowerPoint 1.31 adaptation]
+\RequirePackage{tikz}
+\RequirePackage{iftex}
+\RequirePackage{etoolbox}
+\ifPDFTeX
+  \RequirePackage[T1]{fontenc}\RequirePackage{helvet}
+\else
+  \RequirePackage{fontspec}
+  \IfFontExistsTF{Arial}{\setsansfont{Arial}}{\IfFontExistsTF{TeX Gyre Heros}{\setsansfont{TeX Gyre Heros}}{\setsansfont{Nimbus Sans}}}
+\fi
+\definecolor{DLRblue}{HTML}{00658B}
+\definecolor{DLRgreen}{HTML}{91B333}
+\definecolor{DLRyellow}{HTML}{D8B509}
+\definecolor{DLRgray}{HTML}{808080}
+\definecolor{DLRgreenband}{HTML}{617722}
+\definecolor{DLRyellowband}{HTML}{BE9600}
+\newcommand{\DLRassetpath}{assets}
+\newcommand{\DLRvariant}{blue}
+\newcommand{\DLRsetcolor}[1]{%
+ \def\DLRvariant{#1}\colorlet{DLRaccent}{DLR#1}%
+ \ifdefstring{\DLRvariant}{blue}{\colorlet{DLRband}{DLRblue!50!black}}{\colorlet{DLRband}{DLR#1band}}}
+\DLRsetcolor{blue}
+\DeclareOptionBeamer{blue}{\DLRsetcolor{blue}}
+\DeclareOptionBeamer{green}{\DLRsetcolor{green}}
+\DeclareOptionBeamer{yellow}{\DLRsetcolor{yellow}}
+\ProcessOptionsBeamer
+\newcommand{\DLRfooter}{\insertshortauthor, \insertshortinstitute, \insertshortdate}
+\newcommand{\DLRsetfooter}[1]{\renewcommand{\DLRfooter}{#1}}
+\setbeamersize{text margin left=10.32mm,text margin right=9.12mm}
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{frametitle}{fg=DLRgray}
+\setbeamercolor{structure}{fg=black}
+\setbeamercolor{alerted text}{fg=DLRaccent}
+\setbeamercolor{block title}{fg=white,bg=DLRaccent}
+\setbeamercolor{block body}{fg=black,bg=DLRaccent!10}
+\setbeamerfont{normal text}{size=\fontsize{11.34}{14}\selectfont}
+\setbeamerfont{frametitle}{series=\bfseries,size=\fontsize{13.23}{15}\selectfont}
+\setbeamerfont{framesubtitle}{series=\bfseries,size=\fontsize{11.34}{13}\selectfont}
+\setbeamerfont{itemize/enumerate body}{size=\fontsize{11.34}{14}\selectfont}
+\setbeamerfont{itemize/enumerate subbody}{size=\fontsize{9.45}{12}\selectfont}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\raisebox{.2ex}{\rule{1.15mm}{1.15mm}}}
+\setbeamertemplate{itemize subitem}{\raisebox{.2ex}{\rule{.85mm}{.85mm}}}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{\vspace{4mm}}
+\setbeamertemplate{frametitle}{%
+ \vspace{4.6mm}\parbox[t][14.8mm][t]{128mm}{\usebeamerfont{frametitle}\insertframetitle\par
+ \ifx\insertframesubtitle\@empty\else\vspace{2mm}{\usebeamerfont{framesubtitle}\color{black}\insertframesubtitle}\fi}}
+\newcommand{\DLRpicture}[1]{\node[anchor=north west,inner sep=0] at (0,0) {\includegraphics[width=\paperwidth,height=\paperheight]{#1}};}
+\newcommand{\DLRlogo}{\node[anchor=north west,inner sep=0] at (144.12,-3.95) {\includegraphics[width=12.39mm]{\DLRassetpath/dlr-logo.png}};}
+\newcommand{\DLRfolio}{\node[anchor=south,inner sep=0,text=white,font=\fontsize{5.67}{6}\selectfont] at (1.89,-88.0) {\insertframenumber};}
+\newcommand{\DLRfoot}{\node[anchor=west,inner sep=0,text=black!35,font=\fontsize{4.73}{5.5}\selectfont] at (10.32,-87.6) {\DLRfooter};}
+\setbeamertemplate{background}{%
+ \begin{tikzpicture}[remember picture,overlay,x=1mm,y=1mm]
+ \begin{scope}[shift={(current page.north west)}]
+ \fill[white] (0,0) rectangle (160,-90);
+ \fill[DLRaccent] (0,0) rectangle (3.78,-90);
+ \DLRlogo\DLRfolio\DLRfoot
+ \end{scope}\end{tikzpicture}}
+\setbeamertemplate{title page}{%
+ \begin{tikzpicture}[remember picture,overlay,x=1mm,y=1mm]
+ \begin{scope}[shift={(current page.north west)}]
+ \DLRpicture{\DLRassetpath/dlr-\DLRvariant.jpg}
+ \fill[DLRaccent] (0,0) rectangle (9.12,-90);
+ \fill[DLRband,opacity=.8] (9.12,-49.95) rectangle (136.39,-64.93);
+ \node[anchor=south west,inner sep=0,text width=120mm,font=\bfseries\fontsize{22.68}{25}\selectfont] at (21.73,-45.1) {\MakeUppercase{\inserttitle}};
+ \node[anchor=west,inner sep=0,text=white,text width=110mm,font=\bfseries\fontsize{7.56}{9.5}\selectfont] at (22.32,-57.44) {\insertsubtitle};
+ \node[anchor=north west,inner sep=0] at (136.39,-69.14) {\includegraphics[width=20.11mm]{\DLRassetpath/dlr-logo.png}};
+ \node[anchor=west,inner sep=0,font=\fontsize{6}{8}\selectfont,text width=108mm] at (20,-77) {\insertauthor\par\insertinstitute\par\insertdate};
+ \end{scope}\end{tikzpicture}}
+\newcommand{\DLRtitleframe}{\begin{frame}[plain]\titlepage\end{frame}}
+% Optional background must be a 16:9 image (pre-crop to avoid distortion).
+\newcommand{\DLRsectionframe}[2][]{%
+ {\setbeamertemplate{background}{}\begin{frame}[plain]
+ \begin{tikzpicture}[remember picture,overlay,x=1mm,y=1mm]
+ \begin{scope}[shift={(current page.north west)}]
+ \ifstrempty{#1}{\DLRpicture{\DLRassetpath/dlr-\DLRvariant.jpg}}{\DLRpicture{#1}}
+ \fill[DLRaccent] (0,0) rectangle (3.78,-90);
+ \fill[DLRband,opacity=.8] (3.78,-66.95) rectangle (144.12,-81.93);
+ \node[anchor=west,inner sep=0,text=white,text width=130mm,font=\bfseries\fontsize{18}{21}\selectfont] at (10.32,-74.4) {\MakeUppercase{#2}};
+ \DLRlogo\DLRfolio\DLRfoot
+ \end{scope}\end{tikzpicture}\end{frame}}}
+\newcommand{\DLRfullimage}[2][]{%
+ {\setbeamertemplate{background}{}\begin{frame}[plain]
+ \begin{tikzpicture}[remember picture,overlay,x=1mm,y=1mm]
+ \begin{scope}[shift={(current page.north west)}]
+ \DLRpicture{#2}\DLRlogo
+ \node[anchor=south east,fill=white,fill opacity=.8,text opacity=1,font=\fontsize{5}{6}\selectfont] at (156,-88) {#1};
+ \end{scope}\end{tikzpicture}\end{frame}}}
+\AtBeginDocument{\usebeamerfont{normal text}}
+\mode<all>

@@ -1,0 +1,87 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme[blue]{DLR}
+\usepackage{booktabs}
+\title{Earth observation\\and data science}
+\subtitle{DLR Beamer template\quad |\quad Adapted from PowerPoint Master 1.31}
+\author[V. Jančauskas]{Vytautas Jančauskas}
+\institute[DLR IMF]{German Aerospace Center (DLR)\\Remote Sensing Technology Institute}
+\date{15 October 2026}
+\begin{document}
+\DLRtitleframe
+\begin{frame}[t]{Standard content layout}
+\begin{itemize}\setlength\itemsep{3mm}
+\item The original DLR logo, colours and map backgrounds.
+\item Grey headings and black text on a white background.
+\item A narrow colour strip carries the slide number.
+ \begin{itemize}\item Nested lists use smaller square bullets.\end{itemize}
+\item Standard Beamer content remains editable in LaTeX.
+\end{itemize}
+\end{frame}
+\begin{frame}[t]{Text and image layout}
+\begin{columns}[T,onlytextwidth]
+\column{.47\textwidth}
+\textbf{A familiar slide structure}\par\medskip
+Use this layout for a map, photograph or research figure alongside a short explanation.
+\medskip
+\begin{itemize}\item Keep figure labels readable.\item Add an image credit below the figure.\end{itemize}
+\column{.49\textwidth}
+\includegraphics[width=\linewidth]{assets/dlr-blue.jpg}\par
+{\fontsize{6}{8}\selectfont Map background from the supplied DLR master.}
+\end{columns}
+\end{frame}
+\begin{frame}[t]{Equations and scientific content}
+\textbf{Vector autoregression}\par\medskip
+A multivariate model predicts the current observations from their past:
+\[
+ \mathbf z_t = \sum_{\ell=1}^{p}\mathbf M_{\ell}\mathbf z_{t-\ell}+\mathbf u_t .
+\]
+\begin{itemize}\setlength\itemsep{2mm}
+\item $\mathbf z_t$: the vector of observations at time $t$.
+\item $\mathbf M_{\ell}$: coefficients at lag $\ell$.
+\item $\mathbf u_t$: the remaining innovations.
+\end{itemize}
+\end{frame}
+\DLRsetcolor{green}
+\section{Green variant}
+\DLRsectionframe{Green chapter variant}
+\begin{frame}[t]{Tables and comparison layouts}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}p{39mm}p{88mm}@{}}\toprule
+\textbf{Layout} & \textbf{Beamer equivalent}\\\midrule
+Title & Original map, large title and subtitle band\\
+Content & Heading, bullets, equations or figures\\
+Two or three columns & Standard \texttt{columns} environment\\
+Chapter & Image background and coloured title band\\
+Full image & Image with DLR logo and optional credit\\\bottomrule
+\end{tabular}
+\end{frame}
+\DLRsetcolor{yellow}
+\section{Yellow variant}
+\DLRsectionframe{Yellow chapter variant}
+\begin{frame}[t]{Three-column content layout}
+\begin{columns}[T,onlytextwidth]
+\column{.30\textwidth}\textbf{Observations}\par\medskip
+Satellite measurements describe the state of the environment.
+\column{.30\textwidth}\textbf{Methods}\par\medskip
+Statistical models connect observations across space and time.
+\column{.30\textwidth}\textbf{Interpretation}\par\medskip
+Figures and equations explain the results and their limitations.
+\end{columns}
+\vspace{9mm}
+\begin{block}{Colour use}
+The original master permits a colour change between chapters. Keep one colour within each chapter.
+\end{block}
+\end{frame}
+\DLRfullimage[Map background: supplied DLR PowerPoint master]{assets/dlr-blue.jpg}
+\DLRsetcolor{blue}
+\begin{frame}[t]{Imprint}
+\begin{tabular}{@{}p{23mm}p{107mm}@{}}
+Topic: & DLR Beamer template preview\\[3mm]
+Date: & 2026-10-15\\[3mm]
+Author: & Vytautas Jančauskas\\[3mm]
+Institute: & German Aerospace Center (DLR)\\[3mm]
+Assets: & Logo and map backgrounds extracted from the supplied DLR-PPT-Master\_1.31\_EN.potx.\\[3mm]
+Adaptation: & Editable LaTeX theme. Arial when installed; a Helvetica-compatible fallback otherwise.\\
+\end{tabular}
+\end{frame}
+\end{document}
